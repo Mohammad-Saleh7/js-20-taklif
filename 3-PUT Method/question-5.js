@@ -10,33 +10,40 @@
 //!PUT
 /** WRITE YOUR CODE BELOW DOWN */
 
-document.getElementById('updateForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
+async function updateUser () {
+    const userId = 1; 
+    const url = `https://67954428aad755a134eba7f3.mockapi.io/api/form/users${userId}`; 
 
-    const fName = document.getElementById('fName').value;
-    const lName = document.getElementById('lName').value;
-    const phone = document.getElementById('phone').value;
-
-    const updatedUser = { firstName: fName, lastName: lName, phone: phone };
+    const updatedData = {
+        firstName: "Lufy",
+        lastName: "Monkey D.",
+        phone: "(945) 635-3854"
+    };
 
     try {
-        const response = await fetch('https://your-mockapi-url/users/1', {
-            method: 'PUT',
+        const response = await fetch(url, {
+            method: 'PUT', 
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
-            body: JSON.stringify(updatedUser)
+            body: JSON.stringify(updatedData), 
         });
 
         if (!response.ok) {
-            throw new Error('Network response was not ok');
+            throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log('User updated:', data);
+        console.log('User  updated:', data);
+        alert('User  updated successfully!');
     } catch (error) {
-        console.error('Error:', error);
+        console.error("Error updating user:", error);
+        alert('Update failed. Please try again.');
     }
-});
+}
+
+
+updateUser ();
+
 
 //*To be continue...
